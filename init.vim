@@ -96,4 +96,5 @@ call plug#begin()
 	Plug 'kien/ctrlp.vim'
 	Plug 'rking/ag.vim'
 	Plug 'w0rp/ale'
+	Plug 'elixir-editors/vim-elixir'
 call plug#end()
