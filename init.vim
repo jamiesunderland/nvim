@@ -97,4 +97,5 @@ call plug#begin()
 	Plug 'rking/ag.vim'
 	Plug 'w0rp/ale'
 	Plug 'elixir-editors/vim-elixir'
+	Plug 'slashmili/alchemist.vim'
 call plug#end()
