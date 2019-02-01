@@ -61,6 +61,7 @@ nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
 imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
 nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+nmap <C-s> :source ~/.config/nvim/init.vim<CR>:PlugInstall<CR>:UpdateRemotePlugins<CR>
 
 " Control P
 let g:ctrlp_map = '<c-p>'
@@ -98,4 +99,6 @@ call plug#begin()
 	Plug 'w0rp/ale'
 	Plug 'elixir-editors/vim-elixir'
 	Plug 'slashmili/alchemist.vim'
+	Plug 'leafgarland/typescript-vim'
+	Plug 'jiangmiao/auto-pairs'
 call plug#end()
