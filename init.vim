@@ -1,7 +1,35 @@
+" So plugins can set syntax
+
+syntax off 
+
+"Begin Plugs
+call plug#begin()
+	Plug 'SirVer/ultisnips'
+	Plug 'honza/vim-snippets'
+	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+	Plug 'srcery-colors/srcery-vim'
+	Plug 'vim-syntastic/syntastic'
+	Plug 'NLKNguyen/papercolor-theme' 
+	Plug 'matze/vim-move'
+	Plug 'artur-shaik/vim-javacomplete2'
+	Plug 'tpope/vim-fugitive'
+	Plug 'kien/ctrlp.vim'
+	Plug 'rking/ag.vim'
+	Plug 'w0rp/ale'
+	Plug 'elixir-editors/vim-elixir'
+	Plug 'slashmili/alchemist.vim'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'leafgarland/typescript-vim'
+	""Plug 'peitalin/vim-jsx-typescript'
+	""Plug 'tasn/vim-tsx'
+	Plug 'lucasecdb/vim-tsx'
+call plug#end()
+
 set hidden
 set autoindent
 set cindent
 syntax enable 
+syntax on 
 set wildmenu
 nmap <Space> /
 map <C-o> :NERDTreeToggle %<CR>
@@ -84,21 +112,26 @@ endif
 
 let g:move_key_modifier = 'C'
 
-call plug#begin()
-	Plug 'SirVer/ultisnips'
-	Plug 'honza/vim-snippets'
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-	Plug 'srcery-colors/srcery-vim'
-	Plug 'vim-syntastic/syntastic'
-	Plug 'NLKNguyen/papercolor-theme' 
-	Plug 'matze/vim-move'
-	Plug 'artur-shaik/vim-javacomplete2'
-	Plug 'tpope/vim-fugitive'
-	Plug 'kien/ctrlp.vim'
-	Plug 'rking/ag.vim'
-	Plug 'w0rp/ale'
-	Plug 'elixir-editors/vim-elixir'
-	Plug 'slashmili/alchemist.vim'
-	Plug 'leafgarland/typescript-vim'
-	Plug 'jiangmiao/auto-pairs'
-call plug#end()
+" setup tsx to be supported for jsx auto tags as well 
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+
+"TSX COLORS START
+" dark red
+hi tsxTagName guifg=#E06C75
+
+" orange
+hi tsxCloseString guifg=#F99575
+hi tsxCloseTag guifg=#F99575
+hi tsxAttributeBraces guifg=#F99575
+hi tsxEqual guifg=#F99575
+
+" yellow
+hi tsxAttrib guifg=#F8BD7F cterm=italic
+
+hi ReactState guifg=#C176A7
+hi ReactProps guifg=#D19A66
+hi Events ctermfg=204 guifg=#56B6C2
+hi ReduxKeywords ctermfg=204 guifg=#C678DD
+hi WebBrowser ctermfg=204 guifg=#56B6C2
+hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
