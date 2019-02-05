@@ -91,6 +91,10 @@ nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 nmap <C-s> :source ~/.config/nvim/init.vim<CR>:PlugInstall<CR>:UpdateRemotePlugins<CR>
 
+" Maps crtl c for copying to system buffer
+vnoremap <C-c> "+y
+
+
 " Control P
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -135,3 +139,20 @@ hi Events ctermfg=204 guifg=#56B6C2
 hi ReduxKeywords ctermfg=204 guifg=#C678DD
 hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
+call plug#begin()
+	Plug 'SirVer/ultisnips'
+	Plug 'honza/vim-snippets'
+	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+	Plug 'srcery-colors/srcery-vim'
+	Plug 'vim-syntastic/syntastic'
+	Plug 'NLKNguyen/papercolor-theme' 
+	Plug 'matze/vim-move'
+	Plug 'artur-shaik/vim-javacomplete2'
+	Plug 'tpope/vim-fugitive'
+	Plug 'kien/ctrlp.vim'
+	Plug 'rking/ag.vim'
+	Plug 'w0rp/ale'
+	Plug 'elixir-editors/vim-elixir'
+	Plug 'slashmili/alchemist.vim'
+	Plug 'hsanson/vim-android'
+call plug#end()
