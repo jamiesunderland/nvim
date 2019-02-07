@@ -7,7 +7,7 @@ call plug#begin()
 	Plug 'SirVer/ultisnips'
 	Plug 'honza/vim-snippets'
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-	Plug 'Valloric/YouCompleteMe'
+	Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 	Plug 'srcery-colors/srcery-vim'
 	Plug 'vim-syntastic/syntastic'
 	Plug 'NLKNguyen/papercolor-theme' 
@@ -24,6 +24,8 @@ call plug#begin()
 	Plug 'leafgarland/typescript-vim'
 	Plug 'lucasecdb/vim-tsx'
 	Plug 'hsanson/vim-android'
+	Plug 'neovim/node-host', { 'do': 'npm install' }
+	Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
 call plug#end()
 
 set hidden
@@ -141,6 +143,9 @@ hi Events ctermfg=204 guifg=#56B6C2
 hi ReduxKeywords ctermfg=204 guifg=#C678DD
 hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
+
+" tigris enable
+let g:tigris#enabled = 1
 
 "Youcompleteme fix
 let g:ycm_global_ycm_extra_conf ='~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
