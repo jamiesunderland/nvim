@@ -26,6 +26,7 @@ call plug#begin()
 	Plug 'hsanson/vim-android'
 	Plug 'neovim/node-host', { 'do': 'npm install' }
 	Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
+	Plug 'tpope/vim-surround'
 call plug#end()
 
 set hidden
