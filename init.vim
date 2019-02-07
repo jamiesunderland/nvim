@@ -7,6 +7,7 @@ call plug#begin()
 	Plug 'SirVer/ultisnips'
 	Plug 'honza/vim-snippets'
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+	Plug 'Valloric/YouCompleteMe'
 	Plug 'srcery-colors/srcery-vim'
 	Plug 'vim-syntastic/syntastic'
 	Plug 'NLKNguyen/papercolor-theme' 
@@ -19,10 +20,10 @@ call plug#begin()
 	Plug 'elixir-editors/vim-elixir'
 	Plug 'slashmili/alchemist.vim'
 	Plug 'jiangmiao/auto-pairs'
+	Plug 'pangloss/vim-javascript'
 	Plug 'leafgarland/typescript-vim'
-	""Plug 'peitalin/vim-jsx-typescript'
-	""Plug 'tasn/vim-tsx'
 	Plug 'lucasecdb/vim-tsx'
+	Plug 'hsanson/vim-android'
 call plug#end()
 
 set hidden
@@ -44,6 +45,7 @@ set number
 set background=dark
 set t_Co=256 
 colorscheme PaperColor
+" "colorscheme OceanicNext
 
 " Java highlight extendsion
 let java_highlight_functions = 1
@@ -139,20 +141,44 @@ hi Events ctermfg=204 guifg=#56B6C2
 hi ReduxKeywords ctermfg=204 guifg=#C678DD
 hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
-call plug#begin()
-	Plug 'SirVer/ultisnips'
-	Plug 'honza/vim-snippets'
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-	Plug 'srcery-colors/srcery-vim'
-	Plug 'vim-syntastic/syntastic'
-	Plug 'NLKNguyen/papercolor-theme' 
-	Plug 'matze/vim-move'
-	Plug 'artur-shaik/vim-javacomplete2'
-	Plug 'tpope/vim-fugitive'
-	Plug 'kien/ctrlp.vim'
-	Plug 'rking/ag.vim'
-	Plug 'w0rp/ale'
-	Plug 'elixir-editors/vim-elixir'
-	Plug 'slashmili/alchemist.vim'
-	Plug 'hsanson/vim-android'
-call plug#end()
+
+"Youcompleteme fix
+let g:ycm_global_ycm_extra_conf ='~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" ale
+"" Enable ESLint only for JavaScript.
+let b:ale_linters = ['eslint']
+let g:ale_javascript_eslint_options='-c ~/.config/.eslintrc.json'
+
+" Enable ale auto fix
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'javascript.jsx': ['prettier'],
+\   'jsx': ['prettier'],
+\   'json': ['prettier'],
+\   'css': ['prettier'],
+\   'html': ['prettier'],
+\   'markdown': ['prettier'],
+\   'scss': ['prettier'],
+\   'graphql': ['prettier'],
+\   'mdx': ['prettier'],
+\}
+" To have ALE run Prettier on save: 
+let g:ale_fix_on_save = 1
+" Prettier config
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+
+" Better highlighting
+"
+syn case ignore
+syn region assignment oneline matchgroup=groupkey start=/\k\+\(\s*[[:space:]=]\)\@=/ skip=/\s*=\s*/ matchgroup=groupval end=/\S.*/
+syn match groupcomment "#.*$"
+syn region groupsection start="{" end="}" contains=assignment,groupcomment
+
+" Highlighting
+hi! link groupcomment Comment
+hi! link groupkey Type
+
+syn match pVars /\v\(\zs.*\ze\)/ contains=pKeyword,pParam
+syn match pParam /\i*\(\i*(\)\@!/ contained
+syn match pKeyword /\i*\ze\s*=[^=]/ contained
