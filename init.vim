@@ -42,13 +42,19 @@ set statusline+=%#warningmsg#
 set statusline+=%*
 set number
 
+" show existing tab with 4 spaces width
+set tabstop=2
+" when indenting with '>', use 4 spaces width
+set shiftwidth=2
+" On pressing tab, insert 4 spaces
+set expandtab
+
 " Color related stuff
 " Note at start up time neovim doesn't know what directory to look in
 " for colors
 set background=dark
 set t_Co=256 
 colorscheme PaperColor
-" "colorscheme OceanicNext
 
 " Java highlight extendsion
 let java_highlight_functions = 1
@@ -65,8 +71,6 @@ let g:lightline = {
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-set shiftwidth=2
-set tabstop=2
 set softtabstop=0 noexpandtab
 
 
