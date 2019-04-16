@@ -27,6 +27,7 @@ call plug#begin()
 	Plug 'neovim/node-host', { 'do': 'npm install' }
 	Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
 	Plug 'tpope/vim-surround'
+	Plug 'derekwyatt/vim-scala'
 call plug#end()
 
 set hidden
@@ -66,8 +67,6 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set shiftwidth=2
-set tabstop=2
-set softtabstop=0 noexpandtab
 
 
 " Ale linting
@@ -188,3 +187,51 @@ hi! link groupkey Type
 syn match pVars /\v\(\zs.*\ze\)/ contains=pKeyword,pParam
 syn match pParam /\i*\(\i*(\)\@!/ contained
 syn match pKeyword /\i*\ze\s*=[^=]/ contained
+
+let s:gradlew = escape(findfile('gradlew', '.;') . " -b " . findfile('build.gradle', '.;'), ' \')
+
+if exists("current_compiler")
+    finish
+endif
+
+if exists(":CompilerSet") != 2      " older Vim always used :setlocal
+  command -nargs=* CompilerSet setlocal <args>
+endif
+
+let current_compiler = s:gradlew
+execute "CompilerSet makeprg=" . s:gradlew
+" copied from javac.vim + added the :compileJava bits
+CompilerSet errorformat=%E:compileJava%f:%l:\ %m,%E%f:%l:\ %m,%-Z%p^,%-C%.%#,%-G%.%#
+
+function! Wipeout()
+  " list of *all* buffer numbers
+  let l:buffers = range(1, bufnr('$'))
+
+  " what tab page are we in?
+  let l:currentTab = tabpagenr()
+  try
+    " go through all tab pages
+    let l:tab = 0
+    while l:tab < tabpagenr('$')
+      let l:tab += 1
+
+      " go through all windows
+      let l:win = 0
+      while l:win < winnr('$')
+        let l:win += 1
+        " whatever buffer is in this window in this tab, remove it from
+        " l:buffers list
+        let l:thisbuf = winbufnr(l:win)
+        call remove(l:buffers, index(l:buffers, l:thisbuf))
+      endwhile
+    endwhile
+
+    " if there are any buffers left, delete them
+    if len(l:buffers)
+      execute 'bwipeout' join(l:buffers)
+    endif
+  finally
+    " go back to our original tab page
+    execute 'tabnext' l:currentTab
+  endtry
+endfunction
