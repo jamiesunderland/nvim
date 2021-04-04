@@ -4,15 +4,20 @@ syntax off
 
 "Begin Plugs
 call plug#begin()
+	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggld' }
+  Plug 'hashivim/vim-terraform'
+	Plug 'pangloss/vim-javascript'
+	Plug 'lucasecdb/vim-tsx'
+	Plug 'leafgarland/typescript-vim'
+  Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'jparise/vim-graphql'
 	Plug 'SirVer/ultisnips'
 	Plug 'honza/vim-snippets'
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 	Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 	Plug 'srcery-colors/srcery-vim'
 	Plug 'vim-syntastic/syntastic'
 	Plug 'NLKNguyen/papercolor-theme' 
 	Plug 'matze/vim-move'
-	Plug 'artur-shaik/vim-javacomplete2'
 	Plug 'tpope/vim-fugitive'
 	Plug 'kien/ctrlp.vim'
 	Plug 'rking/ag.vim'
@@ -20,10 +25,6 @@ call plug#begin()
 	Plug 'elixir-editors/vim-elixir'
 	Plug 'slashmili/alchemist.vim'
 	Plug 'jiangmiao/auto-pairs'
-	Plug 'pangloss/vim-javascript'
-	Plug 'leafgarland/typescript-vim'
-	Plug 'lucasecdb/vim-tsx'
-	Plug 'hsanson/vim-android'
 	Plug 'neovim/node-host', { 'do': 'npm install' }
 	Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
 	Plug 'tpope/vim-surround'
@@ -35,19 +36,14 @@ set cindent
 syntax enable 
 syntax on 
 set wildmenu
+
 nmap <Space> /
 map <C-o> :NERDTreeToggle %<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%*
 set number
-
-" show existing tab with 4 spaces width
-set tabstop=2
-" when indenting with '>', use 4 spaces width
-set shiftwidth=2
-" On pressing tab, insert 4 spaces
-set expandtab
+set expandtab ts=2 sw=2 ai
 
 " Color related stuff
 " Note at start up time neovim doesn't know what directory to look in
@@ -71,7 +67,6 @@ let g:lightline = {
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-set softtabstop=0 noexpandtab
 
 
 " Ale linting
@@ -128,6 +123,7 @@ let g:move_key_modifier = 'C'
 " setup tsx to be supported for jsx auto tags as well 
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+au BufNewFile,BufRead *.gql setfiletype graphql
 
 "TSX COLORS START
 " dark red
@@ -149,7 +145,7 @@ hi ReduxKeywords ctermfg=204 guifg=#C678DD
 hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
-" tigris enable
+""" tigris enable
 let g:tigris#enabled = 1
 
 "Youcompleteme fix
@@ -192,3 +188,18 @@ hi! link groupkey Type
 syn match pVars /\v\(\zs.*\ze\)/ contains=pKeyword,pParam
 syn match pParam /\i*\(\i*(\)\@!/ contained
 syn match pKeyword /\i*\ze\s*=[^=]/ contained
+
+
+" set nosmartindent
+" set cindent
+" filetype plugin indent on
+" set cinkeys-=0#
+" set indentkeys-=0#
+" autocmd FileType * set cindent "some file types override it
+
+" set nosmartindent
+"set cindent
+"set cinkeys-=0#
+"set indentkeys-=0#
+"
+nmap <leader>\  :NERDTree<cr>

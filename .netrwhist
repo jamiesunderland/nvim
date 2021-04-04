@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/Users/jamie_sunderland/.config/nvim/.git'
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/Users/jamie/Library/Application Support/Postgres/var-9.5'
+let g:netrw_dirhist_1='/Users/jamie/git/cheqout/apps/cheqout/assets/client/src/dls/UnClaimedDiscountDisplay'
+let g:netrw_dirhist_0='/Users/jamie/cheqout'
+let g:netrw_dirhist_9='/Users/jamie/.ngrok'
+let g:netrw_dirhist_8='/Users/jamie/git/cheqout/.git'
+let g:netrw_dirhist_7='/Users/jamie/git/cheqout/.git/branches'
+let g:netrw_dirhist_6='/Users/jamie/git/cheqout/.git'
+let g:netrw_dirhist_5='/Users/jamie/.aws'
+let g:netrw_dirhist_4='/Users/jamie/git/cheqout/apps/cheqout/assets/client/src/dls/QRCode'
+let g:netrw_dirhist_3='/Users/jamie/git/cheqout/apps/alice'
